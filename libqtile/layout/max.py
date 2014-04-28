@@ -17,11 +17,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-from base import SingleWindow
+from base import Layout
 from .. import utils
 
 
-class Max(SingleWindow):
+class Max(Layout):
     """
         A simple layout that only displays one window at a time, filling the
         screen. This is suitable for use on laptops and other devices with
@@ -31,7 +31,7 @@ class Max(SingleWindow):
     defaults = [("name", "max", "Name of this layout.")]
 
     def __init__(self, **config):
-        SingleWindow.__init__(self, **config)
+        Layout.__init__(self, **config)
         self.clients = []
         self.add_defaults(Max.defaults)
         self.focused = None
@@ -80,7 +80,7 @@ class Max(SingleWindow):
         self.group.focus(client, False)
 
     def clone(self, group):
-        c = SingleWindow.clone(self, group)
+        c = Layout.clone(self, group)
         c.clients = []
         return c
 
@@ -109,7 +109,7 @@ class Max(SingleWindow):
             client.hide()
 
     def info(self):
-        d = SingleWindow.info(self)
+        d = Layout.info(self)
         d["clients"] = [x.name for x in self.clients]
         return d
 
